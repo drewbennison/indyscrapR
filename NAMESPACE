@@ -2,3 +2,4 @@
 
 export(current_elo_ratings)
 export(historical_elo_ratings)
+export(race_results)
