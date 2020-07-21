@@ -18,7 +18,7 @@ season_stats <- function(season=2020, track_type="all") {
   afp <- dt %>%
     group_by(st) %>%
     summarise(xFP = mean(fin))
-  season<- 2020
+
   dt <- dt %>%
     filter(year==season) %>%
     left_join(afp, by=c("st" = "st")) %>%
@@ -60,6 +60,7 @@ season_stats <- function(season=2020, track_type="all") {
     #SELECT DRIVER AND ANY VARIBLES BEFORE YOU SELECT DISTINCT
     distinct(driver, StartRetention, StartPM, Races, PMperStart, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS) %>%
     select(driver, Races, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS, StartRetention, StartPM, PMperStart)
+  return(driver_season_stats)
   }
 
   else{
@@ -117,6 +118,6 @@ season_stats <- function(season=2020, track_type="all") {
       #SELECT DRIVER AND ANY VARIBLES BEFORE YOU SELECT DISTINCT
       distinct(driver, StartRetention, StartPM, Races, PMperStart, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS) %>%
       select(driver, Races, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS, StartRetention, StartPM, PMperStart)
-
+  return(driver_season_stats)
   }
 }
