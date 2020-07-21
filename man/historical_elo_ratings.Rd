@@ -7,5 +7,5 @@
 historical_elo_ratings()
 }
 \description{
-This function loads in historical IndyCar Elo ratings.
+This function returns historical IndyCar Elo ratings.
 }
