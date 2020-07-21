@@ -16,3 +16,4 @@ library("tidyverse")
 #install.packages("lubridate")
 library("lubridate")
 ```
+## Functions
