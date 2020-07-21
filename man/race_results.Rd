@@ -4,7 +4,7 @@
 \alias{race_results}
 \title{Load IndyCar Race Results}
 \usage{
-race_results(year = 2020, race_number = 1)
+race_results(season = 2020, race_number = 1)
 }
 \description{
 This function loads in results and stats from IndyCar races.
