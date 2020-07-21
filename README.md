@@ -1,5 +1,6 @@
 # indyscrapR
-https://user-images.githubusercontent.com/46604140/88115856-292b1680-cb85-11ea-9565-d0aec012b827.png
+![sticker](https://user-images.githubusercontent.com/46604140/88116012-9ccd2380-cb85-11ea-9dc0-44d9472af888.png)
+
 `indyscrapR` is an R package written by Drew Bennison that retrieves IndyCar data complied by [*The Single Seater*](https://thesingleseater.com/). The data is a combination of stats tracked by *TSS* and data from IndyCar on race results. 
 
 ## Installation
