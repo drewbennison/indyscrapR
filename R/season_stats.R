@@ -1,6 +1,8 @@
 #' Calculate IndyCar Full Season Stats
 #'
 #' This function calculates full season basic and advanced IndyCar stats.
+#' Advanced stats are not available for all seasons, so some columns might be
+#' 'NA' or have default values in them.
 #' @export
 season_stats <- function(season=2020, track_type="all") {
   dt <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/master_backup/indycar_results.csv")
