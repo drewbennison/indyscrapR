@@ -2,7 +2,6 @@
 #'
 #' This function loads in the current IndyCar Elo ratings.
 #' @export
-
 current_elo_ratings <- function() {
   elo_ratings_file <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/elo_ratings/elo_tracker.csv")
   elo_ratings <- elo_ratings_file %>% filter(year>2000) %>%
@@ -18,3 +17,17 @@ current_elo_ratings <- function() {
     rename(LastUpdated = date)
   return(elo_ratings)
 }
+
+#' Load Historical IndyCar Elo Ratings
+#'
+#' This function loads in historical IndyCar Elo ratings.
+#' @export
+historical_elo_ratings <- function() {
+elo_ratings_file <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/elo_ratings/elo_tracker.csv")
+elo_ratings <- elo_ratings_file %>% filter(year>2000) %>%
+  mutate(EloRating = round(EloRating)) %>%
+  select(driver, date, year, EloRating) %>%
+  rename(season = year)
+return(elo_ratings)
+
+  }
