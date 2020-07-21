@@ -20,7 +20,7 @@ library("lubridate")
 ## Functions
 `race_results(season, race_number)` returns stats for individual races or all races in a season if `race_number` is set to 0.
 
-`season_stats(season, track_type` returns full season stats by year and track type. The default `track_type` is "all", but can be set to "oval", "road", or "street".
+`season_stats(season, track_type)` returns full season stats by year and track type. The default `track_type` is "all", but can be set to "oval", "road", or "street".
 
 `current_elo_ratings()` returns the most recently updated Elo ratings for all IndyCar drivers starting in 2008. 
 
