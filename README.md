@@ -5,3 +5,7 @@ The package can be installed via GitHub with:
 ``` R
 devtools::install_github("drewbennison/indyscrapR")
 ```
+After installation, load the package using:
+``` R
+library("indyscrapR")
+```
