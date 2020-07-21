@@ -8,6 +8,7 @@ season_stats <- function(season=2020, track_type="all") {
   dt <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/master_backup/indycar_results.csv")
 
   if(track_type=="all") {
+  #calculate average pass efficiency
   avgPE <- dt %>% filter(!is.na(passesFor)) %>%
     select(driver, st, passesFor, passesAgainst) %>%
     mutate(passEff = passesFor/(passesFor+passesAgainst),
@@ -57,7 +58,6 @@ season_stats <- function(season=2020, track_type="all") {
            RunPerc = 100*mean(RunningCheck),
            AFS = mean(fastLapRank),
            Top5Perc = 100*(sum(inTopFive)/sum(laps)),
-           #Average Surplus Position
            AEP = mean(xFPDifference)) %>%
     #SELECT DRIVER AND ANY VARIBLES BEFORE YOU SELECT DISTINCT
     distinct(driver, StartRetention, StartPM, Races, PMperStart, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS) %>%
@@ -66,6 +66,7 @@ season_stats <- function(season=2020, track_type="all") {
   }
 
   else{
+    #calculate average pass efficiency
     avgPE <- dt %>% filter(!is.na(passesFor)) %>%
       select(driver, st, passesFor, passesAgainst) %>%
       mutate(passEff = passesFor/(passesFor+passesAgainst),
@@ -115,7 +116,6 @@ season_stats <- function(season=2020, track_type="all") {
              RunPerc = 100*mean(RunningCheck),
              AFS = mean(fastLapRank),
              Top5Perc = 100*(sum(inTopFive)/sum(laps)),
-             #Average Surplus Position
              AEP = mean(xFPDifference)) %>%
       #SELECT DRIVER AND ANY VARIBLES BEFORE YOU SELECT DISTINCT
       distinct(driver, StartRetention, StartPM, Races, PMperStart, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS) %>%

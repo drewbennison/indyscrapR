@@ -4,15 +4,14 @@
 #' @export
 race_results <- function(season=2020, race_number=0) {
   dt <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/master_backup/indycar_results.csv")
-  #can use advanced stats
+  #return full season stats
   if(race_number !=0){
     dt2 <- dt %>% filter(year==season, raceNumber==race_number) %>%
-      select(-ledPts, -ledMostPts, -polePoints, -xPtsATP25, -xPtsATP)
+      select(-xPtsATP25, -xPtsATP)
     return(dt2)
   } else {
     dt2 <- dt %>% filter(year==season) %>%
-      select(-ledPts, -ledMostPts, -polePoints, -xPtsATP25, -xPtsATP)
+      select(-xPtsATP25, -xPtsATP)
     return(dt2)
   }
-
   }
