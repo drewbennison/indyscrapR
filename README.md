@@ -9,3 +9,10 @@ After installation, load the package using:
 ``` R
 library("indyscrapR")
 ```
+To use `indyscrapR`, you will also need the following packages:
+``` R
+#install.packages("tidyverse")
+library("tidyverse")
+#install.packages("lubridate")
+library("lubridate")
+```
