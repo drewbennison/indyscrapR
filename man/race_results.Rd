@@ -4,7 +4,12 @@
 \alias{race_results}
 \title{Load IndyCar Race Results}
 \usage{
-race_results(season = 2020, race_number = 0)
+race_results(season = 2020, race_number = 1)
+}
+\arguments{
+\item{season}{(required): Season year, 4 digit format}
+
+\item{race_number}{(required): Race number in season, defaults to 0 to return all races in that season}
 }
 \description{
 This function loads in results and stats from IndyCar races. It can be used to load in individual races or full season results by
