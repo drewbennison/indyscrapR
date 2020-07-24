@@ -10,7 +10,8 @@ season_stats <- function(season=2020, track_type="all") {
   dt <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/master_backup/indycar_results.csv")
 
   if(track_type=="all") {
-  #calculate average pass efficiency
+
+  #calculate average passing efficiency
   avgPE <- dt %>% dplyr::filter(!is.na(passesFor)) %>%
     dplyr::select(driver, st, passesFor, passesAgainst) %>%
     dplyr::mutate(passEff = passesFor/(passesFor+passesAgainst),
@@ -19,7 +20,7 @@ season_stats <- function(season=2020, track_type="all") {
     dplyr::summarise(avgPE = mean(passEff)) %>%
     dplyr::select(st, avgPE)
 
-  #Calculate AFP from every starting position
+  #Calculate average finishing position from every starting position
   afp <- dt %>%
     dplyr::group_by(st) %>%
     dplyr::summarise(xFP = mean(fin))
@@ -27,13 +28,13 @@ season_stats <- function(season=2020, track_type="all") {
   dt <- dt %>%
     dplyr::filter(year==season) %>%
     dplyr::left_join(afp, by=c("st" = "st")) %>%
-    dplyr::mutate(xFPDifference=xFP-fin)
+    dplyr::mutate(extra_positions=xFP-fin)
 
   dt <- dt %>%
     dplyr::mutate(passEff = passesFor/(passesFor+passesAgainst),
            passEff = ifelse(is.na(passEff), .5, passEff)) %>%
     dplyr::left_join(avgPE, by="st") %>%
-    dplyr::mutate(AdjPassEff = passEff-avgPE)
+    dplyr::mutate(adj_pass_eff = passEff-avgPE)
 
   driver_season_stats <- dt %>%
     dplyr::group_by(driver) %>%
@@ -55,12 +56,12 @@ season_stats <- function(season=2020, track_type="all") {
            ATP25 = mean(atp25, na.rm = TRUE),
            DevATP25 = sd(atp25, na.rm = TRUE),
            PassEff = 100*mean(passEff),
-           AdjPassEff = 100*mean(AdjPassEff),
+           AdjPassEff = 100*mean(adj_pass_eff),
            RunningCheck = ifelse(status=="running",1,0),
            RunPerc = 100*mean(RunningCheck),
            AFS = mean(fastLapRank),
            Top5Perc = 100*(sum(inTopFive)/sum(laps)),
-           AEP = mean(xFPDifference)) %>%
+           AEP = mean(extra_positions)) %>%
     #SELECT DRIVER AND ANY VARIBLES BEFORE YOU SELECT DISTINCT
     dplyr::distinct(driver, StartRetention, StartPM, Races, PMperStart, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS) %>%
     dplyr::select(driver, Races, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS, StartRetention, StartPM, PMperStart)
@@ -85,13 +86,13 @@ season_stats <- function(season=2020, track_type="all") {
     dt <- dt %>%
       dplyr::filter(year==season, type==track_type) %>%
       dplyr::left_join(afp, by=c("st" = "st")) %>%
-      dplyr::mutate(xFPDifference=xFP-fin)
+      dplyr::mutate(extra_positions=xFP-fin)
 
     dt <- dt %>%
       dplyr::mutate(passEff = passesFor/(passesFor+passesAgainst),
              passEff = ifelse(is.na(passEff), .5, passEff)) %>%
       dplyr::left_join(avgPE, by="st") %>%
-      dplyr::mutate(AdjPassEff = passEff-avgPE)
+      dplyr::mutate(adj_pass_eff = passEff-avgPE)
 
     driver_season_stats <- dt %>%
       dplyr::group_by(driver) %>%
@@ -113,12 +114,12 @@ season_stats <- function(season=2020, track_type="all") {
              ATP25 = mean(atp25),
              DevATP25 = sd(atp25),
              PassEff = 100*mean(passEff),
-             AdjPassEff = 100*mean(AdjPassEff),
+             AdjPassEff = 100*mean(adj_pass_eff),
              RunningCheck = ifelse(status=="running",1,0),
              RunPerc = 100*mean(RunningCheck),
              AFS = mean(fastLapRank),
              Top5Perc = 100*(sum(inTopFive)/sum(laps)),
-             AEP = mean(xFPDifference)) %>%
+             AEP = mean(extra_positions)) %>%
       #SELECT DRIVER AND ANY VARIBLES BEFORE YOU SELECT DISTINCT
       dplyr::distinct(driver, StartRetention, StartPM, Races, PMperStart, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS) %>%
       dplyr::select(driver, Races, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS, StartRetention, StartPM, PMperStart)
