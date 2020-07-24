@@ -39,10 +39,11 @@ season_stats <- function(season=2020, track_type="all") {
     dplyr::mutate(adj_pass_eff = passEff-avgPE)
 
   driver_season_stats <- dt %>%
+    dplyr::mutate(favorableStart = ifelse(lapOneChange>=0, 1,
+                                          ifelse(lapOneChange<0, 0, NA)),
+                  RunningCheck = ifelse(status=="running",1,0)) %>%
     dplyr::group_by(driver) %>%
-    dplyr::summarise(favorableStart = ifelse(lapOneChange>=0, 1,
-                                   ifelse(lapOneChange<0, 0, NA)),
-           StartRetention = 100*mean(favorableStart),
+    dplyr::summarise(StartRetention = 100*mean(favorableStart),
            StartPM = sum(lapOneChange),
            Races = dplyr::n(),
            PMperStart = StartPM/Races,
@@ -58,7 +59,6 @@ season_stats <- function(season=2020, track_type="all") {
            DevATP25 = sd(atp25, na.rm = TRUE),
            PassEff = 100*mean(passEff),
            AdjPassEff = 100*mean(adj_pass_eff),
-           RunningCheck = ifelse(status=="running",1,0),
            RunPerc = 100*mean(RunningCheck),
            AFS = mean(fastLapRank),
            Top5Perc = 100*(sum(inTopFive)/sum(laps)),
