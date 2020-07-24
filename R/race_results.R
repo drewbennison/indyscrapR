@@ -39,14 +39,14 @@ race_results <- function(season=2020, race_number=0) {
                                                  ifelse(lapOneChange<0, 0, NA)),
                                 RunningCheck = ifelse(status=="running",1,0)) %>%
       dplyr::filter(year==season, raceNumber==race_number) %>%
-      dplyr::select(-xPtsATP25, -xPtsATP)
+      dplyr::select(-xPtsATP25, -xPtsATP, -xFP, -avgPE)
     return(dt2)
   } else {
     dt2 <- dt %>% dplyr::mutate(favorableStart = ifelse(lapOneChange>=0, 1,
                                                  ifelse(lapOneChange<0, 0, NA)),
                                 RunningCheck = ifelse(status=="running",1,0)) %>%
       dplyr::filter(year==season) %>%
-      dplyr::select(-xPtsATP25, -xPtsATP)
+      dplyr::select(-xPtsATP25, -xPtsATP, -xFP, -avgPE)
     return(dt2)
   }
   }
