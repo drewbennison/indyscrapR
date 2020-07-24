@@ -4,8 +4,8 @@
 #' @importFrom magrittr "%>%"
 #' @export
 
-plot_championship_points <- function(season=2020, drivers){
-  if(is.na(drivers)){
+plot_championship_points <- function(season=2020, drivers=c()){
+  if(length(drivers)==0){
     warning("No drivers entered. Please set drivers=c('Driver1', 'Driver')")
   }
 
