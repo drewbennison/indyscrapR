@@ -25,6 +25,7 @@ historical_elo_ratings <- function() {
 elo_ratings_file <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/elo_ratings/elo_tracker.csv")
 elo_ratings <- elo_ratings_file %>% dplyr::filter(year>2000) %>%
   dplyr::select(driver, date, year, EloRating) %>%
+  dplyr::mutate(EloRating = round(EloRating)) %>%
   dplyr::rename("season" = "year")
 return(elo_ratings)
 }
