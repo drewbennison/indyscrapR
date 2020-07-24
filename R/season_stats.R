@@ -25,11 +25,13 @@ season_stats <- function(season=2020, track_type="all") {
     dplyr::group_by(st) %>%
     dplyr::summarise(xFP = mean(fin))
 
+  #merge in extra_positions
   dt <- dt %>%
     dplyr::filter(year==season) %>%
     dplyr::left_join(afp, by=c("st" = "st")) %>%
     dplyr::mutate(extra_positions=xFP-fin)
 
+  #merge in average passing efficiency
   dt <- dt %>%
     dplyr::mutate(passEff = passesFor/(passesFor+passesAgainst),
            passEff = ifelse(is.na(passEff), .5, passEff)) %>%
@@ -38,8 +40,7 @@ season_stats <- function(season=2020, track_type="all") {
 
   driver_season_stats <- dt %>%
     dplyr::group_by(driver) %>%
-    dplyr::mutate(percFavorablePass = 100*(sum(passesFor)/(sum(passesFor)+sum(passesAgainst))),
-           favorableStart = ifelse(lapOneChange>=0, 1,
+    dplyr::summarise(favorableStart = ifelse(lapOneChange>=0, 1,
                                    ifelse(lapOneChange<0, 0, NA)),
            StartRetention = 100*mean(favorableStart),
            StartPM = sum(lapOneChange),
@@ -63,7 +64,7 @@ season_stats <- function(season=2020, track_type="all") {
            Top5Perc = 100*(sum(inTopFive)/sum(laps)),
            AEP = mean(extra_positions)) %>%
     #SELECT DRIVER AND ANY VARIBLES BEFORE YOU SELECT DISTINCT
-    dplyr::distinct(driver, StartRetention, StartPM, Races, PMperStart, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS) %>%
+    #dplyr::distinct(driver, StartRetention, StartPM, Races, PMperStart, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS) %>%
     dplyr::select(driver, Races, Pts, xPoints, AFP, DevFP, ASP, DevSP, ATP, DevATP, ATP25, DevATP25, PassEff, AdjPassEff, RunPerc, Top5Perc, AEP, AFS, StartRetention, StartPM, PMperStart)
   return(driver_season_stats)
   }
