@@ -27,7 +27,6 @@ season_stats <- function(season=2020, track_type="all") {
 
   #merge in extra_positions
   dt <- dt %>%
-    dplyr::filter(year==season) %>%
     dplyr::left_join(afp, by=c("st" = "st")) %>%
     dplyr::mutate(extra_positions=xFP-fin)
 
@@ -38,7 +37,9 @@ season_stats <- function(season=2020, track_type="all") {
     dplyr::left_join(avgPE, by="st") %>%
     dplyr::mutate(adj_pass_eff = passEff-avgPE)
 
+  #calculate season stats
   driver_season_stats <- dt %>%
+    dplyr::filter(year==season) %>%
     dplyr::mutate(favorableStart = ifelse(lapOneChange>=0, 1,
                                           ifelse(lapOneChange<0, 0, NA)),
                   RunningCheck = ifelse(status=="running",1,0)) %>%
@@ -85,7 +86,6 @@ season_stats <- function(season=2020, track_type="all") {
 
     #merge in extra_positions
     dt <- dt %>%
-      dplyr::filter(year==season) %>%
       dplyr::left_join(afp, by=c("st" = "st")) %>%
       dplyr::mutate(extra_positions=xFP-fin)
 
@@ -96,8 +96,10 @@ season_stats <- function(season=2020, track_type="all") {
       dplyr::left_join(avgPE, by="st") %>%
       dplyr::mutate(adj_pass_eff = passEff-avgPE)
 
+    #calculate season stats
     driver_season_stats <- dt %>%
-      dplyr::filter(type==track_type) %>%
+      dplyr::filter(type==track_type,
+                    year==season) %>%
       dplyr::mutate(favorableStart = ifelse(lapOneChange>=0, 1,
                                             ifelse(lapOneChange<0, 0, NA)),
                     RunningCheck = ifelse(status=="running",1,0)) %>%
