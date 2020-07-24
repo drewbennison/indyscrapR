@@ -32,7 +32,6 @@ race_results <- function(season=2020, race_number=0) {
     dplyr::left_join(avgPE, by="st") %>%
     dplyr::mutate(adj_pass_eff = passEff-avgPE)
 
-
   #return full season stats
   if(race_number !=0){
     dt2 <- dt %>% dplyr::mutate(favorableStart = ifelse(lapOneChange>=0, 1,
