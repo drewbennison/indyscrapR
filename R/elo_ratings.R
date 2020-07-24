@@ -7,12 +7,9 @@
 current_elo_ratings <- function() {
   elo_ratings_file <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/elo_ratings/elo_tracker.csv")
   elo_ratings <- elo_ratings_file %>% dplyr::filter(year>2000) %>%
-    dplyr::mutate(date=ymd(date)) %>%
+    dplyr::mutate(date=lubridate::ymd(date)) %>%
     dplyr::group_by(driver) %>%
     dplyr::slice(dplyr::which.max(as.Date(date, '%m/%d/%Y'))) %>%
-    dplyr::mutate(EloRating = round(EloRating),
-           PreviousEloRating = round(PreviousEloRating)) %>%
-    dplyr::arrange(-EloRating) %>%
     dplyr::select(-year) %>%
     dplyr::select(-PreviousEloRating)
   return(elo_ratings)
