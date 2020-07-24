@@ -12,7 +12,7 @@ plot_championship_points <- function(season=2020){
     dplyr::group_by(driver) %>%
     dplyr::arrange(raceNumber) %>%
     dplyr::mutate(sum_points = cumsum(pts)) %>%
-    ggplot2::ggplot(aes(x=raceNumber, y=sum_points, color=driver)) + ggplot2::geom_line()
+    ggplot2::ggplot(ggplot2::aes(x=raceNumber, y=sum_points, color=driver)) + ggplot2::geom_line()
 
   return(dt2)
 }
