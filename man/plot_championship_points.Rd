@@ -4,7 +4,7 @@
 \alias{plot_championship_points}
 \title{Plot the season-long championship points standings}
 \usage{
-plot_championship_points(season = 2020)
+plot_championship_points(season = 2020, drivers = c())
 }
 \description{
 Plot the season-long championship points standings

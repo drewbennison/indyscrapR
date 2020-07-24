@@ -1,6 +1,7 @@
 #' Load IndyCar Race Results
-#'
-#' This function loads in results and stats from IndyCar races.
+#' @description
+#' This function loads in results and stats from IndyCar races. It can be used to load in individual races or full season results by
+#' setting `race_number=0`.
 #' @importFrom magrittr "%>%"
 #' @export
 race_results <- function(season=2020, race_number=0) {

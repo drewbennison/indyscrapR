@@ -7,5 +7,6 @@
 race_results(season = 2020, race_number = 0)
 }
 \description{
-This function loads in results and stats from IndyCar races.
+This function loads in results and stats from IndyCar races. It can be used to load in individual races or full season results by
+setting \code{race_number=0}.
 }
