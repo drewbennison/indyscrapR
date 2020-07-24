@@ -2,6 +2,7 @@
 
 export(current_elo_ratings)
 export(historical_elo_ratings)
+export(plot_championship_points)
 export(race_results)
 export(season_stats)
 importFrom(magrittr,"%>%")
