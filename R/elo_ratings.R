@@ -7,11 +7,13 @@
 current_elo_ratings <- function() {
   elo_ratings_file <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/elo_ratings/elo_tracker.csv")
   elo_ratings <- elo_ratings_file %>% dplyr::filter(year>2000) %>%
-    dplyr::mutate(date=lubridate::ymd(date)) %>%
+    dplyr::mutate(date=lubridate::ymd(date),
+                  EloRating=round(EloRating)) %>%
     dplyr::group_by(driver) %>%
     dplyr::slice(which.max(as.Date(date, '%m/%d/%Y'))) %>%
     dplyr::select(-year) %>%
-    dplyr::select(-PreviousEloRating)
+    dplyr::select(-PreviousEloRating) %>%
+    dplyr::rename("last_updated" = "date")
   return(elo_ratings)
 }
 
@@ -23,6 +25,6 @@ historical_elo_ratings <- function() {
 elo_ratings_file <- read.csv("https://raw.githubusercontent.com/drewbennison/thesingleseater/master/datasets/elo_ratings/elo_tracker.csv")
 elo_ratings <- elo_ratings_file %>% dplyr::filter(year>2000) %>%
   dplyr::select(driver, date, year, EloRating) %>%
-  dplyr::rename(season = year)
+  dplyr::rename("season" = "year")
 return(elo_ratings)
 }
