@@ -2,10 +2,10 @@
 % Please edit documentation in R/elo_ratings.R
 \name{current_elo_ratings}
 \alias{current_elo_ratings}
-\title{Load IndyCar Elo Ratings}
+\title{Load IndyCar Elo ratings}
 \usage{
 current_elo_ratings()
 }
 \description{
-This function loads in the current IndyCar Elo ratings.
+This function returns the current IndyCar Elo ratings.
 }

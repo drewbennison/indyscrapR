@@ -1,8 +1,10 @@
-#' Calculate IndyCar Full Season Stats
+#' Calculate full season stats
 #'
 #' This function calculates full season basic and advanced IndyCar stats.
-#' Advanced stats are not available for all seasons, so some columns might be
-#' 'NA' or have default values in them.
+#' Advanced stats are not available for all seasons right now.
+#'
+#' @param season (required): Season year, 4 digit format
+#' @param track_type (required): Can be set to "all" (default), "oval", "road", or "street".
 #'
 #' @importFrom magrittr "%>%"
 #' @export

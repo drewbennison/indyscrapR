@@ -1,6 +1,6 @@
-#' Load IndyCar Race Results
+#' Load individual race results and stats
 #' @description
-#' This function loads in results and stats from IndyCar races. It can be used to load in individual races or full season results by
+#' This function returns the results and stats from races. It can be used to load in individual races or full season results by
 #' setting `race_number=0`.
 #' @param season (required): Season year, 4 digit format
 #' @param race_number (required): Race number in season, defaults to 0 to return all races in that season

@@ -1,6 +1,6 @@
-#' Load IndyCar Elo Ratings
+#' Load IndyCar Elo ratings
 #'
-#' This function loads in the current IndyCar Elo ratings.
+#' This function returns the current IndyCar Elo ratings.
 #'
 #' @importFrom magrittr "%>%"
 #' @export
@@ -17,7 +17,7 @@ current_elo_ratings <- function() {
   return(elo_ratings)
 }
 
-#' Load Historical IndyCar Elo Ratings
+#' Load historical IndyCar Elo ratings
 #'
 #' This function returns historical IndyCar Elo ratings.
 #' @export

@@ -2,12 +2,16 @@
 % Please edit documentation in R/season_stats.R
 \name{season_stats}
 \alias{season_stats}
-\title{Calculate IndyCar Full Season Stats}
+\title{Calculate full season stats}
 \usage{
 season_stats(season = 2020, track_type = "all")
 }
+\arguments{
+\item{season}{(required): Season year, 4 digit format}
+
+\item{track_type}{(required): Can be set to "all" (default), "oval", "road", or "street".}
+}
 \description{
 This function calculates full season basic and advanced IndyCar stats.
-Advanced stats are not available for all seasons, so some columns might be
-'NA' or have default values in them.
+Advanced stats are not available for all seasons right now.
 }

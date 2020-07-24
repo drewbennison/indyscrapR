@@ -2,7 +2,7 @@
 % Please edit documentation in R/elo_ratings.R
 \name{historical_elo_ratings}
 \alias{historical_elo_ratings}
-\title{Load Historical IndyCar Elo Ratings}
+\title{Load historical IndyCar Elo ratings}
 \usage{
 historical_elo_ratings()
 }

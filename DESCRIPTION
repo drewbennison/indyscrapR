@@ -1,6 +1,6 @@
 Package: indyscrapR
 Title: Scrape IndyCar Data from The Single Seater
-Version: 0.0.0.1
+Version: 0.0.1
 Authors@R: 
     person(given = "Drew",
            family = "Bennison",
