@@ -9,7 +9,7 @@ current_elo_ratings <- function() {
   elo_ratings <- elo_ratings_file %>% dplyr::filter(year>2000) %>%
     dplyr::mutate(date=lubridate::ymd(date)) %>%
     dplyr::group_by(driver) %>%
-    dplyr::slice(dplyr::which.max(as.Date(date, '%m/%d/%Y'))) %>%
+    dplyr::slice(which.max(as.Date(date, '%m/%d/%Y'))) %>%
     dplyr::select(-year) %>%
     dplyr::select(-PreviousEloRating)
   return(elo_ratings)
