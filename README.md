@@ -12,15 +12,9 @@ After installation, load the package using:
 ``` R
 library("indyscrapR")
 ```
-To use `indyscrapR`, you will also need the following packages:
-``` R
-#install.packages("tidyverse")
-library("tidyverse")
-#install.packages("lubridate")
-library("lubridate")
-```
+
 ## Functions
-`race_results(season, race_number)` returns stats for individual races or all races in a season if `race_number` is set to 0.
+`race_results(season, race_number)` returns stats for individual races or all races in a season if `race_number=0`.
 
 `season_stats(season, track_type)` returns full season stats by year and track type. The default `track_type` is "all", but can be set to "oval", "road", or "street".
 
